@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400&display=swap');
+@font-face {
+  font-family: 'STXingkai';
+  src: url('https://chismas.pages.dev/font/STXINGKA.TTF') format('truetype');
+}
+@media (min-width: 768px) {
+  #christmas-title {
+    font-size: 5vw; /* 在较大的屏幕上使用较小的比例 */
+  }
+}
+ @media (min-width: 1200px) {
+  #christmas-title {
+    font-size: 72px; /* 在非常大的屏幕上使用固定大小 */
+  }
+}
+* {
+  /* 常规初始化 */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* 解决手机浏览器点击有选框的问题 */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  /* 常规居中显示 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  height: 100vh;
+  /* 渐变背景色 */
+  /* background: radial-gradient(at top, #12313b, #000822); */
+  background: black; 
+}
+
+#overlay-bg {
+  /* 星星背景大小，位置，占整个屏幕 */
+  width: 100vw;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#music-list-box {
+  /* 音乐列表整体的大小，位置等 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+
+  color: #ffd18f;
+  text-align: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+#music-list-box h2 {
+  font-size: 4vmin;
+  margin-bottom: 32px;
+}
+
+#music-list-box ul {
+  /* 设置列表宽度，清除默认样式 */
+  max-width: 400px;
+  width: 70vmin;
+  list-style-type: none;
+}
+#music-list-box ul li {
+  /* 每个列表项都隔开一点 */
+  margin: 2vmin 0;
+}
+
+#christmas-title {
+  font-size: 5vw; /* 默认使用视口宽度的百分比 */
+  font-family: 'STXingkai', 'KaiTi', '楷体', 'Kaiti SC', 'Kaiti TC', sans-serif;/* 设置字体为行楷 */
+  color: rgb(255, 208, 143); /* 设置字体颜色 */
+  font-weight: bold; /* 设置字体粗细 */
+  text-align: center; /* 设置文本居中 */
+}
+
+/* 列表中每个选择按钮的大小，颜色，动画等 */
+#music-list-box ul .btn,
+#music-list-box ul .upload-btn {
+  display: block;
+
+  width: 100%;
+  border: 1px solid rgba(255, 209, 143, 0.2);
+  border-radius: 20px;
+  background-color: rgba(30, 30, 30, 0.4);
+  backdrop-filter: saturate(200%) blur(4px);
+
+  color: rgba(255, 209, 143, 0.6);
+  padding: 16px;
+  font-size: 2vw;
+  font-family: 'STXingkai', 'KaiTi', '楷体', 'Kaiti SC', 'Kaiti TC', sans-serif;
+   /* 设置字体为行楷 */
+  outline: none;
+  pointer-events: auto;
+  cursor: pointer;
+
+  transition: all 0.3s;
+}
+#music-list-box ul .btn:hover,
+#music-list-box ul .upload-btn:hover {
+  border: 1px solid rgba(255, 209, 143, 0.6);
+  color: rgba(255, 209, 143, 0.9);
+  background-color: rgba(30, 30, 30, 0.2);
+}
+
+/* 加载中文字大小，颜色 */
+.text-loading {
+  font-size: 4vmin;
+  color: rgba(255, 209, 143, 0.6);
+}
+
+/* 祝福语文字的字体，大小，颜色，动画等 */
+/* #sentence-box {
+  max-width: 90vmin;
+
+  font-family: Lobster, "ZCOOL QingKe HuangYou", sans-serif;
+  font-weight: 400;
+  font-size: 10vmin;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  user-select: none;
+
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  opacity: 0;
+  animation: animate 1s linear forwards;
+  animation-delay: 1s;
+} */
+@keyframes animate {
+  100% {
+    opacity: 1;
+  }
+}
+#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+
+
+
+.header-item {
+  opacity: 0;
+  transition: all .5s ease-in-out;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.header-item.show {
+  opacity: 1;
+}
+
+#header {
+  font-size: 2vw;
+  /* font-size: 20px; */
+  font-family: 'STXingkai', 'KaiTi', '楷体', 'Kaiti SC', 'Kaiti TC', sans-serif;/* 设置字体为行楷 */
+  color: #f2f4c0; /* 保持原有的字体颜色 */
+  text-align: center; /* 保持文本居中 */
+  position: absolute; /* 保持绝对定位 */
+  left: 50%; /* 保持水平居中 */
+  top: 75%; /* 保持垂直居中 */
+  transform: translate(-50%, -50%); /* 保持居中对齐 */
+  z-index: 15; /* 保持在前景显示 */
+}
