@@ -45,13 +45,11 @@
 	</head>
 
 	<body>
-		<div id="header"></div>
-		<div id="time-display"></div>
 		<!-- 音乐选择页面，选择完之后会覆盖替换掉 -->
 		<div id="overlay">
 			<!-- 音乐列表整体盒子 -->
 			<div id="music-list-box">
-				<h1 id="christmas-title">HaoRan,Christmas Day!</h1>
+				<h1 id="christmas-title">Christmas Day!</h1>
 				<!-- 默认基础音乐列表 -->
 				<ul id="base-music-list"></ul>
 
@@ -288,8 +286,7 @@
 						videoPlayer.style.left = "40%"; // 居中
 						setTimeout(() => {
 							console.log("Showing labels and adding tree after 10 seconds.");
-							updateTimeDisplay(); 
-							setInterval(updateTimeDisplay, 1000); // 开始每秒更新
+							showLabels()
 						}, 5000);
 						range(10).map((i) => {
 							addTree(scene, uniforms, totalPoints, [20, 0, -20 * i]);
@@ -859,64 +856,46 @@
 			//——————————————————————————————————————————————————————————————————————————————————————
 
 
-// 计算当前时间与指定时间之间的差值（分钟、小时、天、秒）
-function calculateTimeDifference(targetDate) {
-    const currentDate = new Date();
-    const targetDateTime = new Date(targetDate);
-    const timeDifference = currentDate - targetDateTime;
+	//——————————————————————————————————————————————————————————————————————————————————————
+			// 计算当前日期与特定日期之间的天数差
+			function calculateDaysSince(dateString) {
+				const startDate = new Date(dateString);
+				const currentDate = new Date();
+				const timeDifference = currentDate - startDate;
+				const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+				return daysDifference;
+			}
 
-    // 计算总秒数
-    const totalSeconds = Math.floor(timeDifference / 1000);
-    
-    // 计算天数、小时、分钟和秒
-    const days = Math.floor(totalSeconds / (60 * 60 * 24));
-    const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
-    const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-    const seconds = totalSeconds % 60;
+			// 获取天数差
+			const daysSince = calculateDaysSince("2024-11-09");
 
-    return { days, hours, minutes, seconds };
-}
 
-// 更新页面显示
-function updateTimeDisplay() {
-    const targetDate = "2024-11-09T23:52:00"; // 修改后的目标时间
-    const timeDiff = calculateTimeDifference(targetDate);
 
-    // 格式化输出内容
-    const timeString = `${timeDiff.days}天 ${timeDiff.hours}时 ${timeDiff.minutes}分 ${timeDiff.seconds}秒`;
-
-    // 更新 myLabels 数组，动态插入时间差
-
-        
 		let myLabels = [
 				"小朋友",
 				"Merry Christmas",
-				`这是我们认识的第${timeDiff.days}天 ${timeDiff.hours}时 ${timeDiff.minutes}分 ${timeDiff.seconds}秒`,
+				`这是我们认识的第${daysSince}天`,
 				"很高兴在茫茫人海中遇见你",
 				"希望我们的友谊天长地久",
 				"祝你永远健健康康，快快乐乐",
 				"一定要站在你所热爱的世界里闪闪发光",
 			];
 
-    // 更新页面上的标签
-    let element = document.getElementById("header");
-    element.innerHTML = ""; // 清空之前的内容
-
-    for (let i = 0; i < myLabels.length; i++) {
-        let _p = document.createElement("p");
-        _p.className = "header-item";
-        _p.innerHTML = myLabels[i];
-        element.appendChild(_p);
-    }
-
-    // 添加动画效果
-    let labels = document.getElementsByClassName('header-item');
-    for (let i = 0; i < myLabels.length; i++) {
-        setTimeout(() => {
-            labels[i].classList.add("show");
-        }, 1000 * i);
-    }
-}
+			function showLabels() {
+				let element = document.getElementById("header");
+				for (let i = 0; i < myLabels.length; i++) {
+					let _p = document.createElement("p");
+					_p.className = "header-item";
+					_p.innerHTML = myLabels[i];
+					element.appendChild(_p);
+				}
+				let labels = document.getElementsByClassName('header-item');
+				for (let i = 0; i < myLabels.length; i++) {
+					setTimeout(() => {
+						labels[i].classList.add("show");
+					}, 1000 * i);
+				}
+			}
 
 		</script>
 
